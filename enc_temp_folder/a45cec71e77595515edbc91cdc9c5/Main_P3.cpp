@@ -1,7 +1,7 @@
 /* Barco Núñez Claudia Citlali
 * No. de Cuenta: 422067621
 * Fecha: 17-02-2026
-* Practica 3. Proyecciones, transformaciones y Shaders
+* Previo 3. Proyecciones, transformaciones y Shaders
 /*/
 
 #include<iostream>
