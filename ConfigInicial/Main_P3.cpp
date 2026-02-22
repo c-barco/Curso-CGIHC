@@ -1,6 +1,6 @@
 /* Barco Núñez Claudia Citlali
 * No. de Cuenta: 422067621
-* Fecha: 17-02-2026
+* Fecha: 22-02-2026
 * Practica 3. Proyecciones, transformaciones y Shaders
 /*/
 
@@ -35,7 +35,7 @@ int main() {
 
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-	GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "Claudia Barco. Previo 3", nullptr, nullptr);
+	GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "Claudia Barco. Practica 3", nullptr, nullptr);
 
 	int screenWidth, screenHeight;
 
@@ -224,11 +224,12 @@ int main() {
 		ourShader.Use();
 		glm::mat4 model=glm::mat4(1);
 		glm::mat4 view=glm::mat4(1);
-		//vista
-		view = glm::translate(view, glm::vec3(-1.0f,-1.0f,-10.0f));
 
-		//prisma rectangular
-		model = glm::rotate( model, glm::radians(120.0f), glm::vec3( 1.0f, 1.0f, 1.0f ) ); // use to compare orthographic and perspective projection
+		//vista
+		view = glm::translate(view, glm::vec3(2.8f,-1.0f,-10.0f));
+
+		//prisma rectangular centro
+		model = glm::rotate( model, glm::radians(120.0f), glm::vec3( 1.0f, 1.0f, 1.0f)); 
 		model = glm::scale(model, glm::vec3(1.0f, 5.0f, 1.5f));
 		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -1.0f));
 		
@@ -245,46 +246,63 @@ int main() {
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
-		//nuevo cubo
-		model = glm::mat4(1);
-		model = glm::translate(model, glm::vec3(-2.7f, 2.4f, -0.5f));
-		model = glm::rotate(model, glm::radians(120.0f), glm::vec3(-1.0f, -1.0f, 1.0f));
-		model = glm::scale(model, glm::vec3(1.5f, 1.5f, 1.5f));
-		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+		//figuras arriba del centro (de abajo hacia arriba)
 
-		//cubo pequeño
+		//prisma rectangular pequeño 
 		model = glm::mat4(1);
 		model = glm::translate(model, glm::vec3(-1.8f, 1.0f, 1.0f));
 		model = glm::rotate(model, 2.0f, glm::vec3(0.0f, 1.0f, 1.0f));
 		model = glm::scale(model, glm::vec3(0.5f, 1.0f, 0.5f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
-
-		//prisma rectangular largo
+		
+		//cubo mediano azul
 		model = glm::mat4(1);
-		model = glm::translate(model, glm::vec3(-2.3f, -3.2f, 1.0f));
-		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 3.5f, 1.0f));
-		model = glm::scale(model, glm::vec3(4.0f, 1.0f, 0.3f));
+		model = glm::translate(model, glm::vec3(-2.f, 2.4f, -0.5f));
+		model = glm::rotate(model, glm::radians(120.0f), glm::vec3(-1.0f, -1.0f, 1.4f));
+		model = glm::scale(model, glm::vec3(1.5f, 1.5f, 1.5f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
+		//prisma cuadrangular largo
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(-1.8f, 3.8f, -5.5f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(3.5f, 2.5f, 2.0f));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(-1.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.75f, 8.5f, 0.75f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//prisma cuadrangular cruzado
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(-1.8f, 5.0f, -4.5f));	
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.1f, 1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 0.0f, 1.5f));
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 5.5f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//figuras abajo del centro (de arriba hacia abajo)
+
 		//prisma parado
 		model = glm::mat4(1);
-		model = glm::translate(model, glm::vec3(-2.0f, -1.8f, 1.0f));
+		model = glm::translate(model, glm::vec3(-1.5f, -1.8f, 0.7f));
 		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(2.0f, 2.0f, 2.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(-2.0f, 0.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(2.0f, 0.5f, 0.5f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
+		//prisma rectangular largo
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(-2.0f, -3.2f, 0.6f));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(-0.2f, 3.5f, 1.0f));
+		model = glm::scale(model, glm::vec3(4.0f, 1.0f, 0.3f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
 		glBindVertexArray(0);
-
-
-
 		
-		
-		
-
 		// Swap the screen buffers
 		glfwSwapBuffers(window);
 	
